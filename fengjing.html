@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multiverse 主页</title>
+  <title>风景相册</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -13,12 +13,20 @@
       padding-bottom: 80px;
     }
 
+    /* 自适应网格：手机2列，平板3列，电脑4列 */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
+    @media (min-width: 768px) {
+      .gallery { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1200px) {
+      .gallery { grid-template-columns: repeat(4, 1fr); }
+    }
+
     .item {
-      aspect-ratio: 16/15;
+      aspect-ratio: 16/9;
       position: relative;
       cursor: pointer;
       overflow: hidden;
@@ -39,6 +47,7 @@
       letter-spacing: 1px;
     }
 
+    /* 固定页脚 */
     footer {
       position: fixed;
       left: 0;
@@ -52,17 +61,13 @@
       color: #fff;
       font-size: 14px;
     }
-
     .home-text {
-      cursor: pointer;
       color: #fff;
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .home-text:hover {
-      color: #a8a7a7;
-    }
+    .home-text:hover { color: #999595; }
   </style>
 </head>
 <body>
@@ -74,9 +79,7 @@
 </footer>
 
 <script>
-  // ======================
-  // ✅ 所有图片只在这里维护
-  // ======================
+  // 只在这里维护图片
   const IMAGES = [
     { src: "/images/fengjing/1.png", title: "MAGNA FEUGIAT LOREM" },
     { src: "/images/fengjing/2.jpg", title: "NISL ADIPISCING" },
@@ -88,19 +91,14 @@
     { src: "/images/fengjing/8.jpg", title: "NUNC VEHICULA" },
   ];
 
-  // 把图片数据存到本地存储，给子页面用
   localStorage.setItem('multiverse_images', JSON.stringify(IMAGES));
 
-  // 生成相册网格
   const gallery = document.getElementById('gallery');
   IMAGES.forEach((img, idx) => {
     const div = document.createElement('div');
     div.className = 'item';
     div.onclick = () => location.href = `fengjingphoto.html?img=${idx}`;
-    div.innerHTML = `
-      <img src="${img.src}">
-      <div class="label">${img.title}</div>
-    `;
+    div.innerHTML = `<img src="${img.src}"><div class="label">${img.title}</div>`;
     gallery.appendChild(div);
   });
 </script>
