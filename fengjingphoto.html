@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>照片查看</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; color: #fff; font-family: Arial, sans-serif; min-height: 100vh; }
+
+    .image-wrapper {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* 图片容器：固定高度 + 等比缩放 */
+    .img-box {
+      position: relative;
+      height: 700px; /* 固定高度（你可以自己改） */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 图片：自动等比缩放，不拉伸、不裁剪 */
+    #displayImage {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* 悬浮按钮 */
+    .nav-btn, #closeBtn {
+      position: absolute;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .img-box:hover .nav-btn,
+    .img-box:hover #closeBtn { opacity: 1; }
+
+    #prevBtn { left: 20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; }
+    #nextBtn { right: 20px; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; }
+    #closeBtn { right: 20px; top: 20px; width: 40px; height: 40px; }
+
+    #prevBtn::after { content: ''; width: 24px; height: 24px; border-left:2px solid white; border-bottom:2px solid white; transform:rotate(45deg); position:absolute; top:50%; left:50%; margin:-12px 0 0 -8px; }
+    #nextBtn::after { content: ''; width: 24px; height: 24px; border-right:2px solid white; border-bottom:2px solid white; transform:rotate(-45deg); position:absolute; top:50%; left:50%; margin:-12px 0 0 -16px; }
+    #closeBtn::before,#closeBtn::after { content:''; width:26px; height:2px; background:white; position:absolute; top:50%; left:50%; }
+    #closeBtn::before { transform:translate(-50%,-50%) rotate(45deg); }
+    #closeBtn::after { transform:translate(-50%,-50%) rotate(-45deg); }
+
+    /* 左下角文字 */
+    .photo-info {
+      position: absolute;
+      left: 25px;
+      bottom: 25px;
+      z-index: 5;
+    }
+    .photo-info h2 { font-size: 1.4em; margin-bottom: 5px; text-shadow: 0 1px 3px #000; }
+    .photo-info p { font-size: 0.9em; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px #000; }
+  </style>
+</head>
+<body>
+
+  <div class="image-wrapper">
+    <div class="img-box">
+      <img id="displayImage">
+      <button id="closeBtn"></button>
+      <button class="nav-btn" id="prevBtn"></button>
+      <button class="nav-btn" id="nextBtn"></button>
+      <div class="photo-info">
+        <h2 id="title"></h2>
+        <p id="desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 读取图片数据
+    const images = JSON.parse(localStorage.getItem('multiverse_images')) || [];
+    let currentIndex = Number(new URLSearchParams(location.search).get('img')) || 0;
+
+    const img = document.getElementById('displayImage');
+    const title = document.getElementById('title');
+    const desc = document.getElementById('desc');
+
+    // 显示图片
+    function showImage() {
+      img.src = images[currentIndex].src;
+      title.innerText = images[currentIndex].title;
+      desc.innerText = `IMAGE ${currentIndex + 1} / ${images.length}`;
+    }
+
+    showImage();
+
+    // 上一张
+    document.getElementById('prevBtn').onclick = () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage();
+    };
+
+    // 下一张
+    document.getElementById('nextBtn').onclick = () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage();
+    };
+
+    // 关闭
+    document.getElementById('closeBtn').onclick = () => {
+      location.href = 'fengjing.html';
+    };
+  </script>
+</body>
+</html>

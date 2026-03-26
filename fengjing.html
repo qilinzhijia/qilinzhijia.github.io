@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiverse 主页</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding-bottom: 80px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .item {
+      aspect-ratio: 16/15;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .3s;
+    }
+    .item:hover img { transform: scale(1.05); }
+    .label {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .home-text {
+      cursor: pointer;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .home-text:hover {
+      color: #a8a7a7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="gallery" id="gallery"></div>
+
+<footer>
+  <a class="home-text" href="index.html">回到主页</a>
+</footer>
+
+<script>
+  // ======================
+  // ✅ 所有图片只在这里维护
+  // ======================
+  const IMAGES = [
+    { src: "/images/fengjing/1.png", title: "MAGNA FEUGIAT LOREM" },
+    { src: "/images/fengjing/2.jpg", title: "NISL ADIPISCING" },
+    { src: "/images/fengjing/3.jpg", title: "TEMPUS ALIQUAM" },
+    { src: "/images/fengjing/4.jpg", title: "ALIQUAM IPSUM" },
+    { src: "/images/fengjing/5.jpg", title: "CURSIS ALIQUAM NISL" },
+    { src: "/images/fengjing/6.jpg", title: "SED CONSEQUAT" },
+    { src: "/images/fengjing/7.jpg", title: "MAURIS ID TELLUS" },
+    { src: "/images/fengjing/8.jpg", title: "NUNC VEHICULA" },
+  ];
+
+  // 把图片数据存到本地存储，给子页面用
+  localStorage.setItem('multiverse_images', JSON.stringify(IMAGES));
+
+  // 生成相册网格
+  const gallery = document.getElementById('gallery');
+  IMAGES.forEach((img, idx) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.onclick = () => location.href = `fengjingphoto.html?img=${idx}`;
+    div.innerHTML = `
+      <img src="${img.src}">
+      <div class="label">${img.title}</div>
+    `;
+    gallery.appendChild(div);
+  });
+</script>
+</body>
+</html>
