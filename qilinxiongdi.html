@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>风景相册</title>
+  <title>麒麟兄弟</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -81,34 +81,19 @@
 <script>
   // 只在这里维护图片
   const IMAGES = [
-    { src: "/images/fengjing/1.jpg", title: "上里" },
-    { src: "/images/fengjing/2.jpg", title: "抚仙湖" },
-    { src: "/images/fengjing/3.jpg", title: "东风韵" },
-    { src: "/images/fengjing/4.jpg", title: "光华逸家" },
-    { src: "/images/fengjing/5.jpg", title: "康定" },
-    { src: "/images/fengjing/6.jpg", title: "燕子洞" },
-    { src: "/images/fengjing/7.jpg", title: "抚仙湖" },
-    { src: "/images/fengjing/8.jpg", title: "建水" },
-    { src: "/images/fengjing/9.jpg", title: "雪景" },
-    { src: "/images/fengjing/10.jpg", title: "燕子洞" },
-    { src: "/images/fengjing/11.jpg", title: "元谋" },
-    { src: "/images/fengjing/12.jpg", title: "西昌" },
-    { src: "/images/fengjing/13.jpg", title: "元谋" },
-    { src: "/images/fengjing/14.jpg", title: "元谋" },
-    { src: "/images/fengjing/15.jpg", title: "元谋" },
-    { src: "/images/fengjing/16.jpg", title: "元谋" },
-    { src: "/images/fengjing/17.jpg", title: "元谋" },
-    { src: "/images/fengjing/18.jpg", title: "石林" },
-    { src: "/images/fengjing/19.jpg", title: "雪景" },
-    { src: "/images/fengjing/20.jpg", title: "元谋" },
-    { src: "/images/fengjing/21.jpg", title: "西昌" },
-    { src: "/images/fengjing/22.jpg", title: "雪景" },
-    { src: "/images/fengjing/23.jpg", title: "元谋" },
-    { src: "/images/fengjing/24.jpg", title: "马头" },
+    { src: "/images/qilinxiongdi/1.jpg", title: "刘芮麟" },
+    { src: "/images/qilinxiongdi/2.jpg", title: "刘宇麒" },
+    { src: "/images/qilinxiongdi/3.jpg", title: "刘芮麟" },
+    { src: "/images/qilinxiongdi/4.jpg", title: "刘芮麟" },
+    { src: "/images/qilinxiongdi/5.jpg", title: "刘芮麟" },
+    { src: "/images/qilinxiongdi/6.jpg", title: "刘芮麟" },
+    { src: "/images/qilinxiongdi/7.jpg", title: "兄弟俩" },
+    { src: "/images/qilinxiongdi/8.jpg", title: "刘芮麟" },
+    { src: "/images/qilinxiongdi/9.jpg", title: "刘芮麟" },
   ];
 
   localStorage.setItem('multiverse_images', JSON.stringify(IMAGES));
-  localStorage.setItem('front_html', "fengjing.html");
+  localStorage.setItem('front_html', "qilinxiongdi.html");
 
   const gallery = document.getElementById('gallery');
   IMAGES.forEach((img, idx) => {
